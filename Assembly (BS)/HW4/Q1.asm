@@ -43,6 +43,7 @@ sof:
 	dec	cx
 	jmp sof
 ext:
+	pop bp
 	ret 2
 print endp
 end
