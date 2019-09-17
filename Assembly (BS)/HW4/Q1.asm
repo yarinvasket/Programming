@@ -6,16 +6,17 @@ num  dw  -1
 	mov	ax,	@data
 	mov	ds,	ax
 
-	mov	ax,	num
-	mov	bx,	10
-
-	mov	cx,	0
-
 	push num
 	call print
 	.exit
 
 	print proc near
+	push bp
+	mov bp, sp
+	mov ax, [bp+4]
+	mov bx, 10
+	mov cx, 0
+
 	cmp ax,0
 	jge next
 	neg ax
