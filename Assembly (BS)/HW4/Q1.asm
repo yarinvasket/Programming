@@ -11,6 +11,11 @@ num  dw  -1
 
 	mov	cx,	0
 
+	push num
+	call print
+	.exit
+
+	print proc near
 	cmp ax,0
 	jge next
 	neg ax
@@ -37,5 +42,6 @@ sof:
 	dec	cx
 	jmp sof
 ext:
-	.exit
+	ret 2
+print endp
 end
