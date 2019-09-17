@@ -3,7 +3,7 @@
 .data
 A dw 12, 5, 8, -1, 4
 B dw -2, 9, 0, 18, 3
-C dw 5 dup (3)
+C dw 5 dup (?)
 .code
 	mov	ax,	@data
 	mov	ds,	ax
@@ -20,11 +20,13 @@ C dw 5 dup (3)
 	mov bp, sp
 	mov si, 0
 	myloop:
-	cmp si, [bp+8]
+	cmp si, [bp+10]
 	jge exit
 	mov ax, [bp+4+si]
 	add ax, [bp+6+si]
 	mov [bp+8+si], ax
+	inc si
+	jmp myLoop
 	exit:
 	pop bp
 	ret 8
