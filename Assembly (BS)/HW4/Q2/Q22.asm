@@ -14,4 +14,19 @@ C dw 5 dup (3)
 	push 5
 	call sum
 	.exit
+
+	sum proc near
+	push bp
+	mov bp, sp
+	mov si, 0
+	myloop:
+	cmp si, [bp+8]
+	jge exit
+	mov ax, [bp+4+si]
+	add ax, [bp+6+si]
+	mov [bp+8+si], ax
+	exit:
+	pop bp
+	ret 8
+	sum endp
 end
