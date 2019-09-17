@@ -1,7 +1,7 @@
 .model  small
 .stack   100h
 .data
-num  dw  -32768
+num  dw  -1
 .code
 	mov	ax,	@data
 	mov	ds,	ax
