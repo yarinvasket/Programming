@@ -22,9 +22,13 @@ C dw 5 dup (?)
 	myloop:
 	cmp si, [bp+11]
 	jge ext
-	mov ax, [bp+4+si]
-	add ax, [bp+6+si]
-	mov [bp+8+si], ax
+
+	mov bx, [bp+4]
+	mov ax, [bx+si]
+	mov bx, [bp+6]
+	add ax, [bx+si]
+	mov bx, [bp+8]
+	mov [bx+si], ax
 	inc si
 	jmp myLoop
 	ext:
