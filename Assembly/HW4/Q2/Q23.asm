@@ -22,7 +22,7 @@ N equ 5
 	mov si, 0
 	myloop:
 	cmp si, [bp+4]
-	je ext
+	je retu
 
 	mov bx, [bp+10]
 	mov ax, [bx+si]
@@ -34,7 +34,7 @@ N equ 5
 	call print
 	inc si
 	jmp myLoop
-	ext:
+	retu:
 	pop bp
 	ret 8
 	sum endp
@@ -59,7 +59,7 @@ next:
 	cmp	ax,	0
 	jne	next
 
-	cmp	num,0
+	cmp	[bp+4], 0
 	jge	sof
 	push       '-'
 	inc	cx
