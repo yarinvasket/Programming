@@ -4,6 +4,7 @@
 A dw 12, 5, 8, -1, 4
 B dw -2, 9, 0, 18, 3
 C dw 5 dup (?)
+N equ 5
 .code
 	mov	ax,	@data
 	mov	ds,	ax
@@ -11,7 +12,7 @@ C dw 5 dup (?)
 	push offset A
 	push offset B
 	push offset C
-	push 5
+	push N
 	call sum
 	.exit
 
@@ -20,14 +21,14 @@ C dw 5 dup (?)
 	mov bp, sp
 	mov si, 0
 	myloop:
-	cmp si, [bp+11]
-	jge ext
+	cmp si, [bp+4]
+	je ext
 
-	mov bx, [bp+4]
+	mov bx, [bp+10]
 	mov ax, [bx+si]
-	mov bx, [bp+6]
-	add ax, [bx+si]
 	mov bx, [bp+8]
+	add ax, [bx+si]
+	mov bx, [bp+6]
 	mov [bx+si], ax
 	inc si
 	jmp myLoop
