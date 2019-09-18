@@ -22,13 +22,13 @@ D dw 5
 	mov si, 0
 	myloop:
 	cmp si, [bp+10]
-	jge exit
+	jge ext
 	mov ax, [bp+4+si]
 	add ax, [bp+6+si]
 	mov [bp+8+si], ax
 	inc si
 	jmp myLoop
-	exit:
+	ext:
 	pop bp
 	ret 8
 	sum endp
