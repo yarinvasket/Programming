@@ -6,8 +6,9 @@ A db 232
 	mov	ax,	@data
 	mov	ds,	ax
 
-	push word ptr A
+	push offset A
 	call multi
+	.exit
 
 	multi proc near
 	push bp
@@ -19,8 +20,6 @@ A db 232
 	myLoop:
 	cmp bl, 0
 	je ext
-	mul [bp+3]
-	mov ah, 0
 	xchg bx, ax
 	div cl
 	xchg bx, ax
