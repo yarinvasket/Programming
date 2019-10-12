@@ -3,15 +3,15 @@
 #include <string.h>
 
 int main() {
-	char *str = (char *) malloc(200 * sizeof(char));
-	gets(str);
-	printf("%d\n", strlen(str));
-	str = (char *) realloc(str, sizeof(char) * strlen(str));
-	for (char *curr = str; 1; curr++) {
-		if (*curr == '!')
-			break;
-		printf("%c", *curr);
-	}
-	free(str);
-	printf("\n");
+	unsigned int base, exponent;
+	unsigned long long result = 1;
+
+	printf("Base: ");
+	scanf("%d", &base);
+	printf("Exponent: ");
+	scanf("%d", &exponent);
+
+	for (int i = 0; i < exponent; i++)
+		result *= base;
+	printf("The result is: %lld\n", result);
 }

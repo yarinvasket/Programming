@@ -6,7 +6,7 @@ typedef struct LinkedList {
 } LinkedList;
 
 void addChar(LinkedList **last, char c) {
-	*last = (LinkedList *) malloc(sizeof(char));
+	*last = (LinkedList *) malloc(sizeof(LinkedList));
 	(*last)->data = c;
 	printf("%c\n", (*last)->data); //debug
 }
