@@ -4,6 +4,10 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine ("Hello Mono World");
+	int a = 3;
+	int b = -4;
+        if (b=a > 1) {
+		Console.WriteLine("Hello");
+	}
     }
 }
