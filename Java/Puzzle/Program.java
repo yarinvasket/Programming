@@ -27,5 +27,6 @@ public class Program {
             res %= people;
         }
         System.out.println(res);
+        return null;
     }
 }
