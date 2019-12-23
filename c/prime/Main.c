@@ -2,17 +2,31 @@
 #include "LinkedList.h"
 
 int main() {
-    LinkedList * head = init(3);
-    LinkedList * tail = add(head, 65);
-    tail = add(tail, 55);
-    tail = add(tail, 35);
-    tail = add(tail, 69);
+    int primes = 10000;
 
-    LinkedList * curr = head;
+    LinkedList * primeNumbers = init(3);
+    LinkedList * tail = primeNumbers;
+
+    for (int i = 5;; i+=2) {
+        start:
+        if (i >= primes)
+            break;
+        LinkedList * curr = primeNumbers;
+        while (curr) {
+            if (i % curr->data == 0) {
+                i += 2;
+                goto start;
+            }
+            curr=curr->next;
+        }
+        tail = add(tail, i);
+    }
+
+    LinkedList * curr = primeNumbers;
     while (curr) {
         printf("%d\n", curr->data);
         curr = curr->next;
     }
-    freeLinkedList(head);
+    freeLinkedList(primeNumbers);
     return 0;
 }
