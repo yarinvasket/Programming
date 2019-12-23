@@ -11,10 +11,11 @@ LinkedList * init(int data) {
     return linkedList;
 }
 
-void add(LinkedList * linkedList, int data) {
+LinkedList * add(LinkedList * linkedList, int data) {
     LinkedList * next = (LinkedList *) calloc(1, sizeof(LinkedList));
     linkedList->next = next;
     next->data = data;
+    return next;
 }
 
 void freeLinkedList(LinkedList * head) {

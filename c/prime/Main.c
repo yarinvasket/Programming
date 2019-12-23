@@ -3,14 +3,10 @@
 
 int main() {
     LinkedList * head = init(3);
-    add(head, 65);
-    LinkedList * tail = head->next;
-    add(tail, 55);
-    tail = tail->next;
-    add(tail, 35);
-    tail = tail->next;
-    add(tail, 69);
-    tail = tail->next;
+    LinkedList * tail = add(head, 65);
+    tail = add(tail, 55);
+    tail = add(tail, 35);
+    tail = add(tail, 69);
 
     LinkedList * curr = head;
     while (curr) {
