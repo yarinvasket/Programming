@@ -5,6 +5,7 @@ int main() {
 
     LinkedList * primeNumbers = init(3);
     LinkedList * tail = primeNumbers;
+    printf("%d\n%d\n", 2, 3);
 
     for (int i = 5;; i+=2) {
         start: if(1);

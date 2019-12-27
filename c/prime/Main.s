@@ -92,6 +92,8 @@ freeLinkedList:
 	.size	freeLinkedList, .-freeLinkedList
 	.section	.rodata
 .LC0:
+	.string	"%d\n%d\n"
+.LC1:
 	.string	"%d\n"
 	.text
 	.globl	main
@@ -111,6 +113,11 @@ main:
 	movq	%rax, -8(%rbp)
 	movq	-8(%rbp), %rax
 	movq	%rax, -24(%rbp)
+	movl	$3, %edx
+	movl	$2, %esi
+	leaq	.LC0(%rip), %rdi
+	movl	$0, %eax
+	call	printf@PLT
 	movl	$5, -28(%rbp)
 .L9:
 	movq	-8(%rbp), %rax
@@ -136,7 +143,7 @@ main:
 	jne	.L12
 	movl	-28(%rbp), %eax
 	movl	%eax, %esi
-	leaq	.LC0(%rip), %rdi
+	leaq	.LC1(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
 	movl	-28(%rbp), %edx
