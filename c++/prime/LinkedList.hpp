@@ -1,14 +1,21 @@
 #include "Node.hpp"
 
 class LinkedList {
-    private:
+    public:
         Node * head;
         Node * tail;
 
-    public:
         LinkedList(int data)
         {
-            head = new Node(data);
+            head = new Node;
+            head->data = data;
             tail = head;
+        }
+
+        void add(int data)
+        {
+            tail->next = new Node;
+            tail = tail->next;
+            tail->data = data;
         }
 };
