@@ -13,5 +13,6 @@ class Game {
 	public:
 		Game(const Point * initialPoints, size_t length);
 		void doTurn();
+		//get string representing the game's board
 		std::string getBoard();
 };
