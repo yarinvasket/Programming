@@ -22,7 +22,7 @@ Game::Game(const std::pair<unsigned int, unsigned int> * initialPoints, size_t l
 }
 
 std::string Game::getBoard() {
-	auto ret = "";
+	std::string ret = "";
 	for (unsigned int i = 0; i < HEIGHT; i++) {
 		for (unsigned int j = 0; j < WIDTH; j++) {
 			ret += cells[i][j] ? '*' : ' ';
