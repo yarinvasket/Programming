@@ -35,10 +35,11 @@ std::string Game::getBoard() {
 void Game::doTurn() {
 	//map containing the number of neighbors of every cell
 	std::unordered_map<std::pair<unsigned int, unsigned int>, unsigned short, pair_hash> neighbors;
-	std::vector<std::pair<unsigned int, unsigned int>> keys;
+	std::unordered_set<std::pair<unsigned int, unsigned int>, pair_hash> keys;
 	
 	//give every cell its number of neighbors
 	for (auto p : aliveCells) {
+		keys.insert(p);
 		auto x = std::get<0>(p);
 		auto y = std::get<1>(p);
 		auto destX = x < WIDTH - 1 ? x + 1 : WIDTH - 1;
@@ -48,14 +49,8 @@ void Game::doTurn() {
 			for (unsigned int srcX = x > 0 ? x - 1 : 0; srcX <= destX; srcX++) {
 				if (srcX == x && srcY == y) continue;
 				std::pair<unsigned int, unsigned int> neighbor = {srcX, srcY};
-				auto got = neighbors.find(neighbor);
-				if (got == neighbors.end()) {
-					neighbors[neighbor]++;
-				}
-				else {
-					neighbors.insert({neighbor, (unsigned short)1});
-					keys.push_back(neighbor);
-				}
+				neighbors[neighbor]++;
+				keys.insert(neighbor);
 			}
 		}
 	}
