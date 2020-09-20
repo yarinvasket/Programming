@@ -9,10 +9,10 @@
 class Game {
 	private:
 		std::array<std::array<bool, WIDTH>, HEIGHT> cells;
-		std::unordered_set<std::pair<unsigned int, unsigned int>, pair_hash> aliveCells;
+		std::unordered_set<Point, pair_hash> aliveCells;
 	
 	public:
-		Game(const std::pair<unsigned int, unsigned int> * initialPoints, size_t length);
+		Game(const Point * initialPoints, size_t length);
 		//performs a turn
 		void doTurn();
 		//get string representing the game's current board

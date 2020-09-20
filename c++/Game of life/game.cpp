@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <vector>
 
-Game::Game(const std::pair<unsigned int, unsigned int> * initialPoints, size_t length) {
+Game::Game(const Point * initialPoints, size_t length) {
 	for (unsigned int i = 0; i < HEIGHT; i++) {
 		for (unsigned int j = 0; j < WIDTH; j++) {
 			cells[i][j] = false;
@@ -34,8 +34,8 @@ std::string Game::getBoard() {
 
 void Game::doTurn() {
 	//map containing the number of neighbors of every cell
-	std::unordered_map<std::pair<unsigned int, unsigned int>, unsigned short, pair_hash> neighbors;
-	std::unordered_set<std::pair<unsigned int, unsigned int>, pair_hash> keys;
+	std::unordered_map<Point, unsigned short, pair_hash> neighbors;
+	std::unordered_set<Point, pair_hash> keys;
 	
 	//give every cell its number of neighbors
 	for (auto p : aliveCells) {
@@ -48,7 +48,7 @@ void Game::doTurn() {
 		for (unsigned int srcY = y > 0 ? y - 1 : 0; srcY <= destY; srcY++) {
 			for (unsigned int srcX = x > 0 ? x - 1 : 0; srcX <= destX; srcX++) {
 				if (srcX == x && srcY == y) continue;
-				std::pair<unsigned int, unsigned int> neighbor = {srcX, srcY};
+				Point neighbor = {srcX, srcY};
 				neighbors[neighbor]++;
 				keys.insert(neighbor);
 			}

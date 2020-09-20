@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-	const std::pair<unsigned int, unsigned int> arr[] = ARR;
+	const Point arr[] = ARR;
 	Game game(arr, (size_t)2);
 	std::cout << game.getBoard();
 	game.doTurn();
