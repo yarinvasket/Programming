@@ -25,7 +25,7 @@ std::string Game::getBoard() {
 	std::string ret = "";
 	for (unsigned int i = 0; i < HEIGHT; i++) {
 		for (unsigned int j = 0; j < WIDTH; j++) {
-			ret += cells[i][j] ? '*' : ' ';
+			ret += cells[i][j] ? (unsigned char)219 : ' ';
 		}
 		ret += '\n';
 	}
@@ -35,11 +35,10 @@ std::string Game::getBoard() {
 void Game::doTurn() {
 	//map containing the number of neighbors of every cell
 	std::unordered_map<Point, unsigned short, pair_hash> neighbors;
-	std::unordered_set<Point, pair_hash> keys;
 	
 	//give every cell its number of neighbors
 	for (auto p : aliveCells) {
-		keys.insert(p);
+		neighbors.insert({p, 0});
 		auto x = std::get<0>(p);
 		auto y = std::get<1>(p);
 		auto destX = x < WIDTH - 1 ? x + 1 : WIDTH - 1;
@@ -48,18 +47,17 @@ void Game::doTurn() {
 		for (unsigned int srcY = y > 0 ? y - 1 : 0; srcY <= destY; srcY++) {
 			for (unsigned int srcX = x > 0 ? x - 1 : 0; srcX <= destX; srcX++) {
 				if (srcX == x && srcY == y) continue;
-				Point neighbor = {srcX, srcY};
-				neighbors[neighbor]++;
-				keys.insert(neighbor);
+				neighbors[{srcX, srcY}]++;
 			}
 		}
 	}
 
 	//take an action on every cell accordingly
-	for (auto p : keys) {
+	for (auto v : neighbors) {
+		auto p = std::get<0>(v);
 		auto y = std::get<1>(p);
 		auto x = std::get<0>(p);
-		auto neighborCount = neighbors[p];
+		auto neighborCount = std::get<1>(v);
 
 		switch (cells[y][x]) {
 			case true:
