@@ -11,5 +11,6 @@ int main() {
 		game.doTurn();
 		std::cout << game.getBoard();
 	}
+	std::cin.get();
 	return 0;
 }

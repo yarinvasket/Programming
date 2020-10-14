@@ -5,7 +5,6 @@
 #include <unordered_set>
 #include <string>
 #include <unordered_map>
-#include <vector>
 
 Game::Game(const Point * initialPoints, size_t length) {
 	for (unsigned int i = 0; i < HEIGHT; i++) {
@@ -59,20 +58,15 @@ void Game::doTurn() {
 		auto x = std::get<0>(p);
 		auto neighborCount = std::get<1>(v);
 
-		switch (cells[y][x]) {
-			case true:
-				if (neighborCount < 2 || neighborCount > 3) {
-					cells[y][x] = false;
-					aliveCells.erase(p);
-				}
-				break;
-			
-			default:
-				if (neighborCount == 3) {
-					cells[y][x] = true;
-					aliveCells.insert(p);
-				}
-				break;
+		if (cells[y][x]) {
+			if (neighborCount < 2 || neighborCount > 3) {
+				cells[y][x] = false;
+				aliveCells.erase(p);
+			}
+		}
+		else if (neighborCount == 3) {
+			cells[y][x] = true;
+			aliveCells.insert(p);
 		}
 	}
 }
