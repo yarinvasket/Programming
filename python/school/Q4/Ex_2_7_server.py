@@ -4,6 +4,7 @@
 
 import socket
 from PIL import ImageGrab
+from pathlib import Path
 import os.path
 
 IP = '0.0.0.0'
@@ -56,7 +57,7 @@ def handle_client_request(command, params):
 	"""
 	if command == 'TAKE_SCREENSHOT':
 		im = ImageGrab.grab()
-		im.save(r'D:\screen.jpg')
+		im.save(r'Files\screen.png')
 		return 'screenshot taken'
 	elif command == 'SEND_FILE':
 		return params
@@ -68,11 +69,15 @@ def send_response_to_client(command, response, client_socket):
 	(for example when needed to send the screenshot to the client)
 	"""
 	if command == 'SEND_FILE':
-		f = open(r'D:\screen.jpg', 'rb')
-		l = f.read(1024)
+		path = response[0]
+		f = open(path, 'rb')
+		bytesize = Path(path).stat().st_size
+		packets = str(int(bytesize / 2048 + 1))
+		client_socket.send(packets.encode())
+		l = f.read(2048)
 		while (l):
 			client_socket.send(l)
-			l = f.read(1024)
+			l = f.read(2048)
 	else:
 		client_socket.send(response.encode())
 

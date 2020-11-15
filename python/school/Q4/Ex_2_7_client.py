@@ -40,12 +40,15 @@ def handle_server_response(my_socket, request):
 	For example, DIR should result in printing the contents to the screen,
 	while SEND_FILE should result in saving the received file and notifying the user
 	"""
-	if request.split()[0] == 'SEND_FILE':
-		f = open(r'D:\screen2.jpg', 'wb')
-		l = my_socket.recv(1024)
-		while l:
+	requestArr = request.split()
+	if requestArr[0] == 'SEND_FILE':
+		path = requestArr[1].split('\\')
+		f = open(r'Files\\' + path[len(path) - 1], 'wb')
+		packets = int(my_socket.recv(25).decode())
+		while packets:
+			l = my_socket.recv(2048)
 			f.write(l)
-			l = my_socket.recv(1024)
+			packets -= 1
 		f.close()
 	else:
 		print(my_socket.recv(1024).decode())
