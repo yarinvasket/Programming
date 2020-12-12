@@ -26,5 +26,6 @@ int main(int argc, char * argv[]) {
 		}
 		auto buffer = toWrite.data();
 		fd.write(buffer, toWrite.length());
+		fd.close();
 	}
 }
